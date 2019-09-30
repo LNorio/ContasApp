@@ -6,17 +6,9 @@ import {View,
 import Svg, {Polygon, Rect} from 'react-native-svg'
 import SvgPath from './SvgPath'
 
-const SaldoBox = (props) => {
-    const {edit, show} = props;
-    return (
-        <View style={style.SaldoBox} >
-            <TouchableOpacity style={style.containSaldoBox} onPress={show}>
-                <View>
-                    <Text style={style.texto}>Nome: Dinheiro Mensal</Text>
-                    <Text style={style.texto}>Valor: 400,00 R$</Text>
-                </View>
-            </TouchableOpacity>
-            <View style={style.editDellBox}>
+const editar = (edit, editDell) =>{
+    if(editDell == true){
+        return <View style={style.editDellBox}>
                 <TouchableOpacity onPress={edit}>
                     <Svg width="40" height="40" viewBox="0 0 540.329 540.329">
                         <Polygon points={`0.002,540.329 58.797,532.66 7.664,481.528`}/>
@@ -33,6 +25,21 @@ const SaldoBox = (props) => {
                     </Svg>
                 </TouchableOpacity>
             </View>
+    }
+}
+
+const SaldoBox = (props) => {
+    const {edit, show, editDell} = props;
+    return (
+        <View style={style.SaldoBox} >
+            <TouchableOpacity style={style.containSaldoBox} onPress={show}>
+                <View>
+                    <Text style={style.texto}>Nome: Dinheiro Mensal</Text>
+                    <Text style={style.texto}>Valor: R$ 400,00</Text>
+                </View>
+            </TouchableOpacity>
+            {editar(edit, editDell)}
+            
         </View>
     )
 }

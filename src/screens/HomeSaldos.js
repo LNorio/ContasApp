@@ -16,8 +16,8 @@ const HomeSaldos = ({navigation}) => {
             <Header onPressItem={() => navigation.navigate('Perfil')} navigation={() => navigation.openDrawer()}/>
             <View style={style.homeSaldos}>
                 <Text style={style.title}>Saldos</Text>               
-                <SaldoBox edit={()=> navigation.navigate('EditSaldo')} show={() => navigation.navigate('Saldo')}/>
-                <SaldoBox edit={()=> navigation.navigate('EditSaldo')} show={() => navigation.navigate('Saldo')}/>
+                <SaldoBox edit={()=> navigation.navigate('EditSaldo')} show={() => navigation.navigate('Saldo')} editDell={true}/>
+                <SaldoBox edit={()=> navigation.navigate('EditSaldo')} show={() => navigation.navigate('Saldo')} editDell={true}/>
             </View>
             <TouchableOpacity style={style.addSaldoIcon} onPress={() => navigation.navigate('AddSaldo')}>
                     <Svg width="60" height="60" viewBox="0 0 52 52" fill="rgba(255,255,255,0.5)">

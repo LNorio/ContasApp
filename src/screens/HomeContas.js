@@ -16,8 +16,8 @@ const HomeContas = ({navigation}) => {
             <Header onPressItem={() => navigation.navigate('Perfil')} navigation={() => navigation.openDrawer()}/>
             <View style={style.homeContas}>  
                 <Text style={style.title}>Contas</Text>             
-                <ContasBox edit={() =>navigation.navigate('EditConta')} show={() => navigation.navigate('Conta')}/>
-                <ContasBox edit={() =>navigation.navigate('EditConta')} show={() => navigation.navigate('Conta')}/>
+                <ContasBox edit={() =>navigation.navigate('EditConta')} show={() => navigation.navigate('Conta')} editDell={true} />
+                <ContasBox edit={() =>navigation.navigate('EditConta')} show={() => navigation.navigate('Conta')} editDell={true} />
             </View>
             <TouchableOpacity style={style.addContaIcon} onPress={() => navigation.navigate('AddConta')}>
                 <Svg width="60" height="60" viewBox="0 0 52 52" fill="rgba(255,255,255,0.5)">

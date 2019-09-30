@@ -2,9 +2,10 @@ import React from 'react'
 import {
     View,
     Text,
-    TouchableOpacity,
     StyleSheet
 } from 'react-native';
+import SaldoBox from '../components/SaldoBox'
+import ContasBox from '../components/ContasBox'
 import Header from '../components/Header'
 
 const Home = ({navigation}) => {
@@ -12,18 +13,18 @@ const Home = ({navigation}) => {
         <View>
             <Header onPressItem={() => navigation.navigate('Perfil')} navigation={() => navigation.openDrawer()}/>
             <View style={style.home}>
-                <Text style={style.titulo}>Bem vindo 
+                <Text style={style.titulo}>Bem vindo, 
                     <Text style={{color:'rgba(0,138,239,1)'}}> Leonardo</Text>
                 </Text>
                 <Text style={style.texto}>Seu saldo Atual eh
-                    <Text> 00,00 R$</Text>
+                    <Text> R$ 00,00</Text>
                 </Text>
-                <TouchableOpacity style={style.addSaldoButton} onPress={() => navigation.navigate('AddSaldo')}>
-                    <Text style={style.textButton}>Adicionar Saldo</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={style.addContaButton} onPress={() => navigation.navigate('AddConta')}>
-                    <Text style={style.textButton}>Adicionar Conta</Text>
-                </TouchableOpacity>
+                <Text style={style.textoCS}>Ultimas Contas</Text>
+                <ContasBox show={() => navigation.navigate('Conta')} />
+                <ContasBox show={() => navigation.navigate('Conta')} />
+                <Text style={style.textoCS}>Ultimos Saldos</Text>
+                <SaldoBox show={() => navigation.navigate('Saldo')} />
+                <SaldoBox show={() => navigation.navigate('Saldo')} />
             </View>
         </View>
     )
@@ -35,17 +36,20 @@ const style = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: "rgba(0,0,0,0.76)",
         height: '100%',
-        paddingTop: 100
     },
     
     titulo: {
-        fontSize: 60,
+        fontSize: 30,
         color: 'white',
-        marginBottom: 15,
         textAlign: 'center'
     },
     
     texto: {
+        fontSize: 25,
+        color: 'rgba(255,255,255,0.90)'
+    },
+
+    textoCS: {
         fontSize: 25,
         color: 'rgba(255,255,255,0.90)',
         marginTop: 20
