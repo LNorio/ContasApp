@@ -3,15 +3,17 @@ import {createAppContainer} from 'react-navigation'
 import HomeContas from './HomeContas'
 import Home from './Home'
 import HomeSaldos from './HomeSaldos'
+import Information from './Information'
 
 const  Main = createAppContainer(
     createDrawerNavigator({
         'Home': {screen: Home},
         'Contas': {screen: HomeContas},
-        'Saldos': {screen: HomeSaldos}
+        'Saldos': {screen: HomeSaldos},
+        'Informacoes': {screen: Information}
     },
     {
-        initialRouteName: 'Home',
+        initialRouteName: 'Informacoes',
         style:{
             backgroundColor: 'rgba(0,0,0,0.80)'
         },

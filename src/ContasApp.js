@@ -6,7 +6,13 @@ import { composeWithDevTools } from 'remote-redux-devtools'
 import RootReducer from './reducers'
 import reduxThunk from 'redux-thunk'
 
-const store = createStore(RootReducer, composeWithDevTools(applyMiddleware(reduxThunk)))
+const enhance = composeWithDevTools({
+    realtime: true,
+    hostname: 'localhost',
+    port: 8000,
+  });
+
+const store = createStore(RootReducer, enhance(applyMiddleware(reduxThunk)))
 
 export default ContasApp = () => {
     return (

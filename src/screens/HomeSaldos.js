@@ -1,48 +1,70 @@
-import React from 'react'
+import React, { Component } from 'react'
 import {
     View,
+    ScrollView,
     Text,
     TouchableOpacity,
-    StyleSheet
+    StyleSheet,
+    FlatList
 } from 'react-native';
 import Svg from 'react-native-svg'
 import Header from '../components/Header'
 import SaldoBox from '../components/SaldoBox.js'
 import SvgPath from '../components/SvgPath'
+import {connect} from 'react-redux';
+import {watchSaldos} from '../actions';
 
-const HomeSaldos = ({navigation}) => {
-    return (
-        <View>
-            <Header onPressItem={() => navigation.navigate('Perfil')} navigation={() => navigation.openDrawer()}/>
-            <View style={style.homeSaldos}>
-                <Text style={style.title}>Saldos</Text>               
-                <SaldoBox edit={()=> navigation.navigate('EditSaldo')} show={() => navigation.navigate('Saldo')} editDell={true}/>
-                <SaldoBox edit={()=> navigation.navigate('EditSaldo')} show={() => navigation.navigate('Saldo')} editDell={true}/>
-            </View>
-            <TouchableOpacity style={style.addSaldoIcon} onPress={() => navigation.navigate('AddSaldo')}>
+class HomeSaldos extends Component {
+
+    componentDidMount() {
+        this.props.watchSaldos()
+        console.log(...this.props.saldos)
+    }
+
+    render() {
+        return (
+            <View>
+                {/* <Header onPressItem={() => this.props.navigation.navigate('Perfil')} navigation={() => this.props.navigation.openDrawer()} />
+                <ScrollView
+                    style={style.homeSaldos}
+                    contentContainerStyle={{ alignItems: 'center' }}
+                >
+                    <Text style={style.title}>Saldos</Text>
+                    <FlatList
+                        data={[...this.props.saldos]}
+                        syle={{ width: '100%', height: 80 }}
+                        renderItem={({ item }) => {
+                            return (
+                                <SaldoBox edit={() => this.props.navigation.navigate('EditSaldo')} show={() => this.props.navigation.navigate('Saldo', { saldo: item })} editDell={true} saldo={item} />
+                            )
+                        }}
+                        keyExtractor={item => item.id.toString()}
+                    />
+                </ScrollView>
+                <TouchableOpacity style={style.addSaldoIcon} onPress={() => this.props.navigation.navigate('AddSaldo')}>
                     <Svg width="60" height="60" viewBox="0 0 52 52" fill="rgba(255,255,255,0.5)">
-                        <SvgPath type="add"/>
+                        <SvgPath type="add" />
                     </Svg>
-            </TouchableOpacity>
-            
-        </View>
-    )
+                </TouchableOpacity> */}
+                <Text>oi</Text>
+            </View>
+        )
+    }
 }
 
 const style = StyleSheet.create({
     homeSaldos: {
-        alignItems: 'center',
         backgroundColor: "rgba(0,0,0,0.76)",
         height: '100%',
         paddingTop: 20
     },
 
-    title:{
+    title: {
         fontSize: 60,
         color: 'rgba(255,255,255,0.90)',
         marginBottom: 20
     },
-    
+
     addSaldoIcon: {
         position: 'absolute',
         bottom: 50,
@@ -52,4 +74,22 @@ const style = StyleSheet.create({
     }
 })
 
-export default HomeSaldos
+const mapStateToProps = state => {
+    const {listaSaldos} = state;
+  
+    if (listaSaldos === null) {
+      return {saldos: listaSaldos};
+    }
+  
+    const keys = Object.keys(listaSaldos);
+    const listaSaldosWithId = keys.map(key => {
+      return {...listaSaldos[key], id: key};
+    });
+    return {saldos: listaSaldosWithId};
+  };
+  
+  export default connect(
+    mapStateToProps,
+    {watchSaldos},
+  )(HomeSaldos);
+  

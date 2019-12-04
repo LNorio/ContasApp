@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import {
     View,
     Text,
@@ -6,32 +6,60 @@ import {
     TouchableOpacity,
     StyleSheet
 } from 'react-native'
+import {connect} from 'react-redux';
+import {setFieldConta, saveConta} from '../actions/NewContaAction';
 //import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
 
-const AddContas = ({navigation}) => {
-    return (
-        <View style={style.addConta}>
-            <View style={{width: '100%', alignItems: 'center'}}>
-                <Text style={style.title}>Nova Conta</Text>
-                <Text style={style.texto}>Nome</Text>
-                <TextInput style={style.input} placeholder="Nome"/>
-                <Text style={style.texto}>Data</Text>
-                <TextInput style={style.input} placeholder="Data"/>
-                <Text style={style.texto}>Valor</Text>
-                <TextInput style={style.input} placeholder="Valor"/>
-                <Text style={style.texto}>Descricao</Text>
-                <TextInput style={style.input} placeholder="Descricao"/>
+class AddConta extends Component {
+    constructor(props) {
+        super(props)
+    }
+
+    render() {
+        const {contaForm, setFieldConta, saveConta, navigation} = this.props;
+        return (
+            <View style={style.addConta}>
+                <View style={{ width: '100%', alignItems: 'center' }}>
+                    <Text style={style.title}>Nova Conta</Text>
+                    <Text style={style.texto}>Nome</Text>
+                    <TextInput 
+                    style={style.input} 
+                    placeholder="Nome" 
+                    value={contaForm.title}
+                    onChangeText={value => setFieldConta('title', value)}
+                    />
+                    <Text style={style.texto}>Valor</Text>
+                    <TextInput style={style.input} 
+                    placeholder="Valor" 
+                    value={contaForm.value}
+                    onChangeText={value => setFieldConta('value', value)}
+                    />
+                    <Text style={style.texto}>Descricao</Text>
+                    <TextInput style={style.input} 
+                    placeholder="Descricao" 
+                    value={contaForm.description}
+                    onChangeText={value => setFieldConta('description', value)}
+                    />
+                </View>
+                <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-around' }}>
+                    <TouchableOpacity style={style.adcButton} 
+                        onPress={async () => {
+                            try {
+                              await saveConta(contaForm);
+                              navigation.goBack();
+                            } catch (error) {
+                              Alert.alert('Erro', error.message);
+                            }
+                          }}>
+                        <Text style={style.textButton}>Confirmar</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={style.adcButton} onPress={() => navigation.goBack()}>
+                        <Text style={style.textButton}>Voltar</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
-            <View style={{width: '100%', flexDirection: 'row', justifyContent: 'space-around'}}>
-                <TouchableOpacity style={style.adcButton} onPress={() => navigation.goBack()}>
-                    <Text style={style.textButton}>Confirmar</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={style.adcButton} onPress={() => navigation.goBack()}>
-                    <Text style={style.textButton}>Voltar</Text>
-                </TouchableOpacity>
-            </View>
-        </View>
-    )
+        )
+    }
 }
 
 const style = StyleSheet.create({
@@ -57,13 +85,13 @@ const style = StyleSheet.create({
         textAlign: 'center',
         fontSize: 20
     },
-    
+
     texto: {
         fontSize: 25,
         color: 'rgba(255,255,255,0.90)',
         marginTop: 20
     },
-    
+
     adcButton: {
         borderRadius: 5,
         height: 40,
@@ -72,14 +100,28 @@ const style = StyleSheet.create({
         justifyContent: 'center',
         marginTop: 35
     },
-    
+
     textButton: {
         alignSelf: 'center',
         color: 'white',
         fontSize: 20,
         fontWeight: 'bold'
     }
-    
+
 })
 
-export default AddContas
+const mapStateToProps = state => {
+    return {
+      contaForm: state.contaForm,
+    };
+  };
+  
+  const mapDispatchToProps = {
+    setFieldConta,
+    saveConta,
+  };
+  
+  export default connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  )(AddConta);

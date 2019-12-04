@@ -2,17 +2,18 @@ import React from 'react'
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native'
 
 const Saldo = ({navigation}) => {
+    const { saldo } = navigation.state.params
     return (
         <View style={style.saldo}>
             <Text style={style.title}>Saldo</Text>
             <Text style={style.texto}>Nome:</Text>
-            <Text style={style.texto}>Dinheiro Mensal</Text>
+            <Text style={style.texto}>{saldo.title}</Text>
             <Text style={style.texto}>Data:</Text>
-            <Text style={style.texto}>01/09/2019</Text>
+            <Text style={style.texto}>{saldo.date}</Text>
             <Text style={style.texto}>Valor:</Text>
-            <Text style={style.texto}>R$ 400,00</Text>
+            <Text style={style.texto}>R$ {saldo.value}</Text>
             <Text style={style.texto}>Descricao:</Text>
-            <Text style={style.texto}>Dinheiro de todo o mes</Text>
+            <Text style={style.texto}>{saldo.description}</Text>
             <TouchableOpacity style={style.voltarButton} onPress={() => navigation.goBack()}>
                 <Text style={style.textButton}>Voltar</Text>
             </TouchableOpacity>

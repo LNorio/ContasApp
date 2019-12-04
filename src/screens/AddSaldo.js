@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import {
     View,
     Text,
@@ -6,31 +6,59 @@ import {
     TouchableOpacity,
     StyleSheet
 } from 'react-native'
+import { connect } from 'react-redux';
+import { setFieldSaldo, saveSaldo } from '../actions/NewSaldoAction';
 
-const AddSaldo = ({navigation}) => {
-    return (
-        <View style={style.addSaldo}>
-            <View style={{width: '100%', alignItems: 'center'}}>
-                <Text style={style.title}>Novo Saldo</Text>
-                <Text style={style.texto}>Nome</Text>
-                <TextInput style={style.input} placeholder="Nome"/>
-                <Text style={style.texto}>Data</Text>
-                <TextInput style={style.input} placeholder="Data"/>
-                <Text style={style.texto}>Valor</Text>
-                <TextInput style={style.input} placeholder="Valor"/>
-                <Text style={style.texto}>Descricao</Text>
-                <TextInput style={style.input} placeholder="Descricao"/>
+class AddSaldo extends Component {
+    constructor(props) {
+        super(props)
+    }
+
+    render() {
+        const { saldoForm, setFieldSaldo, saveSaldo, navigation } = this.props;
+        return (
+            <View style={style.addSaldo}>
+                <View style={{ width: '100%', alignItems: 'center' }}>
+                    <Text style={style.title}>Novo Saldo</Text>
+                    <Text style={style.texto}>Nome</Text>
+                    <TextInput
+                        style={style.input}
+                        placeholder="Nome"
+                        value={saldoForm.title}
+                        onChangeText={value => setFieldSaldo('title', value)}
+                    />
+                    <Text style={style.texto}>Valor</Text>
+                    <TextInput style={style.input}
+                        placeholder="Valor"
+                        value={saldoForm.value}
+                        onChangeText={value => setFieldSaldo('value', value)}
+                    />
+                    <Text style={style.texto}>Descricao</Text>
+                    <TextInput style={style.input}
+                        placeholder="Descricao"
+                        value={saldoForm.description}
+                        onChangeText={value => setFieldSaldo('description', value)}
+                    />
+                </View>
+                <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-around' }}>
+                    <TouchableOpacity style={style.adsButton}
+                        onPress={async () => {
+                            try {
+                                await saveSaldo(saldoForm);
+                                navigation.goBack();
+                            } catch (error) {
+                                Alert.alert('Erro', error.message);
+                            }
+                        }}>
+                        <Text style={style.textButton}>Confirmar</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={style.adsButton} onPress={() => navigation.goBack()}>
+                        <Text style={style.textButton}>Voltar</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
-            <View style={{width: '100%', flexDirection: 'row', justifyContent: 'space-around'}}>
-                <TouchableOpacity style={style.adsButton} onPress={() => navigation.goBack()}>
-                    <Text style={style.textButton}>Confirmar</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={style.adsButton} onPress={() => navigation.goBack()}>
-                    <Text style={style.textButton}>Voltar</Text>
-                </TouchableOpacity>
-            </View>
-        </View>
-    )
+        )
+    }
 }
 
 const style = StyleSheet.create({
@@ -56,13 +84,13 @@ const style = StyleSheet.create({
         textAlign: 'center',
         fontSize: 20
     },
-    
+
     texto: {
         fontSize: 25,
         color: 'rgba(255,255,255,0.90)',
         marginTop: 20
     },
-    
+
     adsButton: {
         borderRadius: 5,
         height: 40,
@@ -71,14 +99,29 @@ const style = StyleSheet.create({
         justifyContent: 'center',
         marginTop: 35
     },
-    
+
     textButton: {
         alignSelf: 'center',
         color: 'white',
         fontSize: 20,
         fontWeight: 'bold'
     }
-    
+
 })
 
-export default AddSaldo
+const mapStateToProps = state => {
+    return {
+      saldoForm: state.saldoForm,
+    };
+  };
+  
+  const mapDispatchToProps = {
+    setFieldSaldo,
+    saveSaldo,
+  };
+  
+  export default connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  )(AddSaldo);
+  

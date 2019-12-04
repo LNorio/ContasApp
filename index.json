@@ -1,0 +1,51 @@
+[
+    {"user": {
+        "teste": 1,
+        "conta": [
+            {
+                "id": 1,
+                "title": "primeiro",
+                "date": "12/3/2019",
+                "value": 300,
+                "description": "primeiro card"
+            },
+            {
+                "id": 2,
+                "title": "segundo",
+                "date": "12/3/2019",
+                "value": 700,
+                "description": "segundo card"
+            },
+            {
+                "id": 1,
+                "title": "terceiro",
+                "date": "12/3/2019",
+                "value": 123120,
+                "description": "terceiro card"
+            }
+        ],
+        "saldo": [
+            {
+                "id": 1,
+                "title": "primeiro",
+                "date": "12/3/2019",
+                "value": 15,
+                "description": "primeiro card"
+            },
+            {
+                "id": 2,
+                "title": "segundo",
+                "date": "12/3/2019",
+                "value": 13,
+                "description": "segundo card"
+            },
+            {
+                "id": 1,
+                "title": "terceiro",
+                "date": "12/3/2019",
+                "value": 10,
+                "description": "terceiro card"
+            }
+        ]}
+    }
+]

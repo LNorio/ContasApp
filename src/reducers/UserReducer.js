@@ -1,4 +1,3 @@
-
 import { USER_LOGIN, USER_LOGOUT } from '../actions'
 
 export default UserReducer = (state = null, action) => {

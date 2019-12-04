@@ -1,54 +1,61 @@
-import React from 'react'
-import {View, 
-        Text, 
-        StyleSheet,
-        TouchableOpacity} from 'react-native'
-import Svg, {Polygon, Rect} from 'react-native-svg'
+import React, { Component } from 'react'
+import {
+    View,
+    Text,
+    StyleSheet,
+    TouchableOpacity,
+    FlatList
+} from 'react-native'
+import Svg, { Polygon, Rect } from 'react-native-svg'
 import SvgPath from './SvgPath'
-
-const editar = (edit, editDell) =>{
-    if(editDell == true){
-        return <View style={style.editDellBox}>
+import {connect} from 'react-redux';
+import {deleteSaldo} from '../actions/SaldoAction';
+class SaldoBox extends Component {
+    editar = (edit, editDell) => {
+        if (editDell == true) {
+            return <View style={style.editDellBox}>
                 <TouchableOpacity onPress={edit}>
                     <Svg width="40" height="40" viewBox="0 0 540.329 540.329">
-                        <Polygon points={`0.002,540.329 58.797,532.66 7.664,481.528`}/>
-                        <Polygon points={`16.685,412.341 10.657,458.56 81.765,529.668 127.983,523.64 442.637,208.992 331.338,97.688`}/>
-                        <SvgPath type="edit"/>                        
+                        <Polygon points={`0.002,540.329 58.797,532.66 7.664,481.528`} />
+                        <Polygon points={`16.685,412.341 10.657,458.56 81.765,529.668 127.983,523.64 442.637,208.992 331.338,97.688`} />
+                        <SvgPath type="edit" />
                     </Svg>
                 </TouchableOpacity>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={ () => {
+                    this.props.deleteSaldo(saldo)
+                }}>
                     <Svg width="40" height="40" viewBox="0 0 512 512">
-                        <Polygon points={`353.574,176.526 313.496,175.056 304.807,412.34 344.885,413.804`}/>
-                        <Rect x={`235.948`} y={`175.791`} width={"40.104"} height={"237.28"}/>
-                        <Polygon points={`207.186,412.334 198.497,175.049 158.419,176.52 167.109,413.804`}/>
-                        <SvgPath type="delete"/>
+                        <Polygon points={`353.574,176.526 313.496,175.056 304.807,412.34 344.885,413.804`} />
+                        <Rect x={`235.948`} y={`175.791`} width={"40.104"} height={"237.28"} />
+                        <Polygon points={`207.186,412.334 198.497,175.049 158.419,176.52 167.109,413.804`} />
+                        <SvgPath type="delete" />
                     </Svg>
                 </TouchableOpacity>
             </View>
+        }
     }
-}
 
-const SaldoBox = (props) => {
-    const {edit, show, editDell} = props;
-    return (
-        <View style={style.SaldoBox} >
-            <TouchableOpacity style={style.containSaldoBox} onPress={show}>
-                <View>
-                    <Text style={style.texto}>Nome: Dinheiro Mensal</Text>
-                    <Text style={style.texto}>Valor: R$ 400,00</Text>
-                </View>
-            </TouchableOpacity>
-            {editar(edit, editDell)}
-            
-        </View>
-    )
+    render() {
+        const { edit, show, editDell, saldo } = this.props;
+        return (
+            <View style={style.SaldoBox} >
+                <TouchableOpacity style={style.containSaldoBox} onPress={show}>
+                    <View>
+                        <Text style={style.texto}>Nome: {saldo.title}</Text>
+                        <Text style={style.texto}>Valor: R$ {saldo.value}</Text>
+                    </View>
+                </TouchableOpacity>
+                {this.editar(edit, editDell)}
+            </View>
+        )
+    }
 }
 
 const style = StyleSheet.create({
     SaldoBox: {
         flexDirection: "row",
         backgroundColor: "rgba(255,255,255,0.9)",
-        width: "100%",
+        width: 400,
         height: 80,
         marginBottom: 10
     },
@@ -61,11 +68,11 @@ const style = StyleSheet.create({
         fontSize: 20,
         fontWeight: 'bold'
     },
-    editDellBox:{
+    editDellBox: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        marginRight: 10,    
+        marginRight: 10,
         flex: 1
     },
 
@@ -84,7 +91,7 @@ const style = StyleSheet.create({
         justifyContent: 'center',
         marginTop: 35
     },
-    
+
     textButton: {
         alignSelf: 'center',
         color: 'white',
@@ -93,4 +100,8 @@ const style = StyleSheet.create({
     }
 })
 
-export default SaldoBox
+export default connect(
+    null,
+    {deleteSaldo},
+  )(SaldoBox);
+  

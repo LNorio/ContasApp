@@ -10,8 +10,6 @@ const EditContaContain = () => {
             <Text style={style.title}>Editar Conta</Text>
             <Text style={style.texto}>Nome</Text>
             <TextInput style={style.input} placeholder="Nome">Pagar Aluguel</TextInput>
-            <Text style={style.texto}>Data</Text>
-            <TextInput style={style.input} placeholder="Data">13/09/2019</TextInput>
             <Text style={style.texto}>Valor</Text>
             <TextInput style={style.input} placeholder="Valor">400,00</TextInput>
             <Text style={style.texto}>Descricao</Text>

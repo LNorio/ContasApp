@@ -45,11 +45,25 @@ class Login extends Component {
     }
 
     processLogin = () => {
-        this.props.processLogin({email: this.state.email, senha: this.state.senha})
+        this.props.processLogin({ email: this.state.email, senha: this.state.senha })
+            .then(user => {
+                if (user) {
+                    this.props.navigation.replace('Main')
+                } else {
+                    this.setState({
+                        message: ''
+                    })
+                }
+            })
+            .catch(err => {
+                this.setState({
+                    message: this.messageCode(err.code)
+                })
+            })
     }
 
     messageCode = code => {
-        switch(code){
+        switch (code) {
             case 'auth/user-not-found':
                 return "Email não encontrado"
             case 'auth/wrong-password':
@@ -60,13 +74,13 @@ class Login extends Component {
     }
 
     renderMessage = () => {
-        if(!this.state.message){
+        if (!this.state.message) {
             return null
         }
         else {
             return (
                 <View style={style.erro}>
-                    <Text style={{color: 'white', textAlign: 'center'}}>{this.state.message}</Text>
+                    <Text style={{ color: 'white', textAlign: 'center' }}>{this.state.message}</Text>
                 </View>
             )
         }
@@ -95,13 +109,10 @@ class Login extends Component {
                         onChangeText={valor => this.onChangeHandler('senha', valor)}
                         value={this.state.senha}
                     />
-                    <TouchableOpacity style={style.conectarButton} onPress={() => this.processLogin()}>
-                        <Text style={style.textButton}>Conectar</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={style.cadastrarButton} onPress={() => this.props.navigation.navigate('Cadastrar')}>
-                        <Text style={style.textButton}>Cadastrar</Text>
-                    </TouchableOpacity>
                 </FormRow>
+                <TouchableOpacity style={style.conectarButton} onPress={() => this.processLogin()}>
+                    <Text style={style.textButton}>Conectar</Text>
+                </TouchableOpacity>
                 {this.renderMessage()}
             </View>
         )
@@ -175,4 +186,4 @@ const style = StyleSheet.create({
 
 })
 
-export default connect(null, { processLogin }) (Login)
+export default connect(null, { processLogin })(Login)
