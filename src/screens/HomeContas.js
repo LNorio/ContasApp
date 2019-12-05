@@ -13,6 +13,7 @@ import ContasBox from '../components/ContasBox.js'
 import SvgPath from '../components/SvgPath'
 import { connect } from 'react-redux'
 import { watchContas } from '../actions/ContaAction';
+import { white } from 'ansi-colors';
 
 class HomeContas extends Component {
     constructor(props) {
@@ -26,8 +27,8 @@ class HomeContas extends Component {
     renderList() {
         if (this.props.contas === null) {
             return (
-                <View >
-                    <Text>Nao tem nada</Text>
+                <View style={{ paddingVertical: 20 }} >
+                    <Text style={{ color: 'white', fontSize: 30 }}>Nao tem nada</Text>
                 </View>
             );
         } else {

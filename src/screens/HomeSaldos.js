@@ -23,8 +23,8 @@ class HomeSaldos extends Component {
     renderList() {
         if (this.props.saldos === null) {
             return (
-                <View>
-                    <Text>Nao tem nada</Text>
+                <View style={{ paddingVertical: 20 }} >
+                    <Text style={{ color: 'white', fontSize: 30 }}>Nao tem nada</Text>
                 </View>
             );
         } else {
