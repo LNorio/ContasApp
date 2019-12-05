@@ -1,4 +1,4 @@
-import { USER_LOGIN, USER_LOGOUT } from '../actions'
+import { USER_LOGIN, USER_LOGOUT } from '../actions/UserActions';
 
 export default UserReducer = (state = null, action) => {
     switch(action.type) {

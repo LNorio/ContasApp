@@ -4,6 +4,7 @@ import {
     SET_ALL_FIELDS_CONTA,
     RESET_FORM_CONTA,
   } from '../actions/NewContaAction';
+  import contaReducer from './ContaReducer';
   
   const INITIAL_STATE = {
     title: '',

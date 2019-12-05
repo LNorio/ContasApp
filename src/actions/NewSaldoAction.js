@@ -36,7 +36,7 @@ export const saveSaldo = saldo => {
 
   return async dispatch => {
     if (saldo.id) {
-      await firebase.database
+      await firebase.database()
         .ref(`/users/${currentUser.uid}/saldos/${saldo.id}`)
         .set(saldo);
     } else {

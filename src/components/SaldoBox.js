@@ -22,7 +22,7 @@ class SaldoBox extends Component {
                     </Svg>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={ () => {
-                    this.props.deleteSaldo(saldo)
+                    this.props.deleteSaldo(this.props.saldo)
                 }}>
                     <Svg width="40" height="40" viewBox="0 0 512 512">
                         <Polygon points={`353.574,176.526 313.496,175.056 304.807,412.34 344.885,413.804`} />

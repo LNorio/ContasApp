@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import firebase from 'firebase';
 import FormRow from '../components/FormRow';
-import { processLogin } from '../actions'
+import { processLogin } from '../actions/UserActions'
 import { connect } from 'react-redux';
 
 class Login extends Component {
@@ -37,8 +37,7 @@ class Login extends Component {
             projectId: "contasapp-1fb4f",
             storageBucket: "contasapp-1fb4f.appspot.com",
             messagingSenderId: "984325133145",
-            appId: "1:984325133145:web:af133b3327ff273d30f248",
-            measurementId: "G-9BDRSJD3LS"
+            appId: "1:984325133145:web:af133b3327ff273d30f248"
         };
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);

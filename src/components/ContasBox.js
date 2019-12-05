@@ -10,6 +10,7 @@ import SvgPath from './SvgPath'
 import {connect} from 'react-redux';
 import {deleteConta} from '../actions/ContaAction';
 class ContasBox extends Component {
+
     editar = (edit, editDell) => {
         if (editDell == true) {
             return <View style={style.editDellBox}>
@@ -20,9 +21,9 @@ class ContasBox extends Component {
                         <SvgPath type="edit" />
                     </Svg>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={
-                    this.props.deleteConta(conta)
-                }>
+                <TouchableOpacity onPress={ () => {
+                    this.props.deleteConta(this.props.conta)
+                }}>
                     <Svg width="40" height="40" viewBox="0 0 512 512">
                         <Polygon points={`353.574,176.526 313.496,175.056 304.807,412.34 344.885,413.804`} />
                         <Rect x={`235.948`} y={`175.791`} width={"40.104"} height={"237.28"} />
@@ -75,4 +76,7 @@ const style = StyleSheet.create({
     }
 })
 
-export default ContasBox
+export default connect(
+    null,
+    {deleteConta},
+  )(ContasBox);

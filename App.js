@@ -1,3 +1,1 @@
-import ContasApp from './src/ContasApp'
-
-export default ContasApp
+export default from './src/ContasApp';

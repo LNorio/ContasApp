@@ -22,8 +22,32 @@ class HomeContas extends Component {
     componentDidMount() {
         this.props.watchContas();
     }
+
+    renderList() {
+        if (this.props.contas === null) {
+            return (
+                <View >
+                    <Text>Nao tem nada</Text>
+                </View>
+            );
+        } else {
+            return (
+                <FlatList
+                    data={[...this.props.contas]}
+                    syle={{ width: '100%', height: 80 }}
+                    renderItem={({ item }) => {
+                        return (
+                            <ContasBox edit={() => this.props.navigation.navigate('EditConta')} show={() => this.props.navigation.navigate('Conta', { conta: item })} editDell={true} conta={item} />
+                        )
+                    }}
+                    keyExtractor={item => item.id.toString()}
+                />
+            )
+        }
+    }
+
     render() {
-        const {navigation} = this.props
+        const { navigation } = this.props
         return (
             <View>
                 <Header onPressItem={() => navigation.navigate('Perfil')} navigation={() => navigation.openDrawer()} />
@@ -32,23 +56,13 @@ class HomeContas extends Component {
                     contentContainerStyle={{ alignItems: 'center' }}
                 >
                     <Text style={style.title}>Contas</Text>
-                    <FlatList
-                        data={[...this.props.contas]}
-                        syle={{ width: '100%', height: 80 }}
-                        renderItem={({ item }) => {
-                            return (
-                                <ContasBox edit={() => navigation.navigate('EditConta')} show={() => navigation.navigate('Conta', { conta: item })} editDell={true} conta={item} />
-                            )
-                        }}
-                        keyExtractor={item => item.id.toString()}
-                    />
+                    {this.renderList()}
                 </ScrollView>
                 <TouchableOpacity style={style.addContaIcon} onPress={() => navigation.navigate('AddConta')}>
                     <Svg width="60" height="60" viewBox="0 0 52 52" fill="rgba(255,255,255,0.5)">
                         <SvgPath type="add" />
                     </Svg>
                 </TouchableOpacity>
-
             </View>
         )
     }
@@ -77,21 +91,21 @@ const style = StyleSheet.create({
 })
 
 const mapStateToProps = state => {
-    const {listaContas} = state;
-  
+    const { listaContas } = state;
+
     if (listaContas === null) {
-      return {contas: listaContas};
+        return { contas: listaContas };
     }
-  
+
     const keys = Object.keys(listaContas);
     const listaContasWithId = keys.map(key => {
-      return {...listaContas[key], id: key};
+        return { ...listaContas[key], id: key };
     });
-    return {contas: listaContasWithId};
-  };
-  
+    return { contas: listaContasWithId };
+};
+
 export default connect(
     mapStateToProps,
-    {watchContas}
+    { watchContas }
 )(HomeContas);
-  
+

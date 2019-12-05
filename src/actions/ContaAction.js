@@ -5,7 +5,7 @@ export const SET_CONTAS = 'SET_CONTAS';
 
 const setContas = contas => ({
   type: SET_CONTAS,
-  contas: contas,
+  contas: contas
 });
 
 export const watchContas = () => {

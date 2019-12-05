@@ -4,6 +4,7 @@ import {
     SET_ALL_FIELDS_SALDO,
     RESET_FORM_SALDO,
   } from '../actions/NewSaldoAction';
+  import SaldoReducer from './SaldoReducer';
   
   const INITIAL_STATE = {
     title: '',

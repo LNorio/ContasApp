@@ -11,4 +11,4 @@ export default combineReducers({
     saldoForm: NewSaldoForm,
     listaContas: ContaReducer,
     listaSaldos: SaldoReducer
-})
+});

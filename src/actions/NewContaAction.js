@@ -36,7 +36,7 @@ export const saveConta = conta => {
 
   return async dispatch => {
     if (conta.id) {
-      await firebase.database
+      await firebase.database()
         .ref(`/users/${currentUser.uid}/contas/${conta.id}`)
         .set(conta);
     } else {

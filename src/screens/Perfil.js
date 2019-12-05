@@ -1,20 +1,12 @@
 import React from 'react'
 import {View, 
         Text, 
-        TextInput, 
         TouchableOpacity, 
         StyleSheet} from 'react-native'
 
 const Perfil = ({navigation}) => {
     return (
         <View style={style.perfil}>
-            <Text style={style.titulo}>Perfil</Text>
-            <TextInput style={style.input} placeholder="Nome">Leonardo</TextInput>
-            <TextInput style={style.input} placeholder="Email">email@gmail.com</TextInput>
-            <TextInput style={style.input} secureTextEntry={true} placeholder="Senha"></TextInput> 
-            <TouchableOpacity style={style.salvarButton} onPress={() => navigation.goBack()}>
-                <Text style={style.textButton}>Salvar</Text>
-            </TouchableOpacity>
             <TouchableOpacity style={style.voltarButton} onPress={() => navigation.goBack()}>
                 <Text style={style.textButton}>Voltar</Text>
             </TouchableOpacity>

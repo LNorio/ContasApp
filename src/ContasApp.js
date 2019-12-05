@@ -10,14 +10,14 @@ const enhance = composeWithDevTools({
     realtime: true,
     hostname: 'localhost',
     port: 8000,
-  });
+});
 
-const store = createStore(RootReducer, enhance(applyMiddleware(reduxThunk)))
+const store = createStore(RootReducer, enhance(applyMiddleware(reduxThunk)));
 
-export default ContasApp = () => {
-    return (
-        <Provider store={store}>
-            <Router />
-        </Provider>
-    )
-}
+const ContasApp = prop => (
+    <Provider store={store}>
+        <Router />
+    </Provider>
+)
+
+export default ContasApp;
